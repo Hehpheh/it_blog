@@ -1,0 +1,375 @@
+
+* {
+    font-family: Arial, sans-serif;
+    color: #2b2b2b;
+}
+
+body {
+
+    margin: 0;
+    padding: 0;
+
+
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style-type: none;
+}
+
+/*HEADER*/
+
+header {
+    background: #ffffff;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header ul li a {
+    display: block;
+    font-size: 1.2rem;
+    text-decoration: none;
+    padding: 20px;
+}
+
+header ul li a:hover {
+    transition: 0.2s;
+    color: #668ed4;
+}
+
+
+/*MAIN*/
+.home-description {
+    background-image: url('../img/background_home_description.jpg');
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    color: white;
+}
+
+.home-description::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.home-description h2 strong,
+.home-description p {
+    position: relative;
+    z-index: 2;
+    color: white;
+}
+
+
+.page-title {
+
+    padding: 20px;
+}
+
+.page-title h1 strong {
+
+    color: black;
+}
+
+
+
+/*POSTS*/
+
+
+
+
+
+.post .col-md-4 {
+    display: flex;
+    align-items: center;
+}
+
+
+.post .col-md-4 img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+}
+
+/*SINGLE POST*/
+
+.like-button {
+    cursor: pointer;
+
+}
+
+.bi-heart-fill {
+    color: red;
+}
+
+#heart-icon {
+
+    font-size: 2rem;
+}
+
+
+
+
+
+
+
+/*SIDEBAR*/
+.input-group {
+    border: none;
+}
+
+.input-group .form-control {
+    padding-right: 30px;
+    border: 2px solid black;
+    border-right: none;
+}
+
+.input-group .btn {
+    background-color: transparent;
+    border: 2px solid black;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.input-group .btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: black;
+}
+
+
+
+
+
+
+
+.categories {
+    background: #eeeeee;
+
+}
+
+.categories-title {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+
+
+.categories-list {
+    list-style: none;
+    padding: 0;
+}
+
+.category-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-bottom: 1px solid #dde1e5;
+}
+
+.category-item:last-child {
+    border-bottom: none;
+}
+
+.category-link {
+    text-decoration: none;
+    color: #333;
+}
+
+.category-count {
+    background-color: transparent;
+    font-weight: bold;
+}
+
+/*Page navigation*/
+.pagination .page-link {
+    color: #2c3e50;
+    border: 1px solid #dde1e5;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #aab8c2;
+}
+
+/*ABOUT US*/
+.mission-description {
+    font-size: 1.25rem;
+    text-align: center; /* Центрирование текста */
+    display: block; /* Обеспечивает перенос текста на новую строку */
+    margin-top: 1rem; /* Отступ сверху для дополнительного пространства */
+}
+
+
+.about_us-card {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 40px 20px 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+    margin: 20px 0;
+
+}
+
+.about_us-icon {
+    position: absolute;
+    top: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #eeeeee;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.about_us-icon i {
+    font-size: 24px;
+    color: #333;
+}
+
+
+.image-container {
+    padding: 0;
+    border: 1px solid #ced4da; /* Light gray border */
+    border-radius: 5px;
+    overflow: hidden; /* Ensure images fit the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+.image-container img {
+    width: 100%; /* Make images responsive to the container */
+    height: auto;
+    display: block; /* Remove extra space below images */
+}
+.about-image-1{
+    width: 90%;
+}
+
+/*CONTACTS*/
+.contact-form {
+    background: #3d404f
+
+}
+
+.contact-form h2 strong,
+.contact-form p,
+.contact-form label {
+
+    color: white;
+}
+
+/*FOOTER*/
+
+footer {
+    background: #3d404f;
+
+
+}
+
+.bottom-page footer {
+    position: absolute;
+    bottom: 0;
+}
+
+footer hr,
+footer p {
+    color: white;
+}
+
+
+/*ACCOUNT */
+
+
+.profile-header {
+    background: #3d404f;
+    padding: 20px;
+    position: relative;  /* Добавлено для позиционирования */
+}
+
+.profile-header h1,
+.profile-header p,
+.profile-header a {
+    color: white;
+}
+
+.profile-picture, .profile-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.profile-picture {
+    background-color: #dc3545;
+    color: white;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.profile-settings-icon i {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5em;
+    color: #fafafa;
+}
+
+.profile-settings-icon i:hover {
+    color: #007bff;
+
+}
+
+.empty-state {
+    margin-top: 20px;
+    color: gray;
+}
+
+
+.account-info {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #dde1e5;
+    margin-bottom: 20px;
+}
+
+.settings-column i {
+    color: white;
+}
+
+.settings-column ul li a {
+    color: black;
+}
+
+.settings-column ul li a:hover {
+    color: black;
+}
+
+
+/*FORM*/
+
+.err {
+    color: red;
+}
+
+/*COMMENTS*/
+

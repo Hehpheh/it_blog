@@ -285,6 +285,24 @@ function selectAllFromCommentsWithUsers($table1, $table2,$post_id){
     return $query->fetchAll();
 
 }
+function selectAllFromCommentsAdm($table1, $table2, $limit, $offset){
+    global $pdo;
+    $sql = "SELECT 
+        t1.id,
+        t1.status,
+        t1.page,
+        t1.commentText,
+        t1.user_id,
+        t1.created_date,
+        t2.email
+        FROM $table1 AS t1 JOIN $table2 AS t2 ON t1.user_id = t2.id   ORDER BY t1.created_date DESC LIMIT $limit OFFSET $offset";
+
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchAll();
+
+}
 
 /*Получаем все посты написанные пользователем*/
 
@@ -320,4 +338,25 @@ function selectAllPostsWithLikes($table1, $table2, $userId, $limit, $offset){
     $query->execute();
     dbCheckError($query);
     return $query->fetchAll();
+}
+
+
+function isLiked($postId, $userId)
+{
+    global $pdo;
+    $sql = "SELECT COUNT(*) FROM likes WHERE id_post = $postId AND id_user = $userId";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $count = $stmt->fetchColumn();
+    return $count > 0;
+}
+
+function getLikesCount($postId)
+{
+    global $pdo;
+    $sql = "SELECT COUNT(*) FROM likes WHERE id_post = $postId";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $count = $stmt->fetchColumn();
+    return $count;
 }

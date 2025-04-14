@@ -21,5 +21,10 @@
                 <i class="bi bi-chat-dots me-2"></i>Комментарии
             </a>
         </li>
+        <li class="list-group-item">
+            <a href="../contact_form/index.php" class="text-white">
+                <i class="bi bi-envelope  me-2"></i>Обратная связь
+            </a>
+        </li>
     </ul>
 </div>

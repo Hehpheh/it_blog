@@ -19,4 +19,16 @@
             <?php endforeach; ?>
         </ul>
     </div>
+    <div class="container-fluid mt-3 py-3 popular-posts">
+        <h4 class="popular-posts-title ms-2">Топ постов</h4>
+        <ul class="popular-posts-list ">
+            <?php for ($i = 1; $i < 6; $i++): ?>
+                <li class="popular-posts-item">
+                    <a class="popular-posts-link d-flex align-items-center">
+                        <strong><?= $i ?></strong> Название статьи
+                    </a>
+                </li>
+            <?php endfor; ?>
+        </ul>
+    </div>
 </div>

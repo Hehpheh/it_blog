@@ -4,7 +4,7 @@ include "app/controllers/comments.php";
 ?>
 <div class="col-md-12">
     <h3 class="m-3">Комментарии</h3>
-
+    <?php if(!empty($_SESSION)):?>
     <div class="card m-4">
         <div class="card-body">
             <form action="<?= BASE_URL . "/single.php?post=" . htmlspecialchars($page) ?>" method="post">
@@ -20,7 +20,7 @@ include "app/controllers/comments.php";
             </form>
         </div>
     </div>
-
+    <?php endif; ?>
     <div class="comment-list">
         <?php if (!empty($commentsAdm)): ?>
             <?php foreach ($commentsAdm as $comment): ?>

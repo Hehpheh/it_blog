@@ -1,0 +1,48 @@
+<?php
+
+include_once  "app/database/db.php";
+include_once  "app/href.php";
+
+
+$messages = selectAll('contact_form_messages');
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['del_id'])) {
+    $id = $_GET['del_id'];
+    delete('contact_form_messages', $id);
+    header('location: ' . BASE_URL . '/contact_form/index.php');
+    exit();
+}
+
+
+$errMsg = '';
+$name = '';
+$email = '';
+$message = '';
+$successMsg='';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button_name'])) {
+    // Получаем данные из формы
+    $name = trim(filter_var($_POST['name'], FILTER_SANITIZE_SPECIAL_CHARS));
+    $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
+    $message = trim(filter_var($_POST['message'], FILTER_SANITIZE_SPECIAL_CHARS));
+
+
+
+    if (empty($errMsg)) {
+        $contact_form_message = [
+            'name' => $name,
+            'email' => $email,
+            'message' => $message,
+        ];
+
+        $id = insert('contact_form_messages', $contact_form_message);
+        if ($id) {
+            $successMsg='Ваше сообщение успешно отправлено!';
+
+        } else {
+            $errMsg = "Ошибка при добавлении сообщения в базу данных.";
+        }
+    }
+}
+
+

@@ -1,10 +1,9 @@
 <?php
-
 include_once "app/database/db.php";
 include_once "app/href.php";
 
 $page = $_GET['post'];
-$commentsAdm = selectAllFromCommentsWithUsers('comments','users',$page);
+
 $username = '';
 $commentText = '';
 $status = 1; //комментарий опубликован

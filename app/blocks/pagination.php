@@ -6,11 +6,24 @@
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                <li class="page-item <?= ($page == $i) ? 'active' : '' ?>">
-                    <a class="page-link" href="?id=<?= $id ?>&page=<?= $i ?>"><?= $i ?></a>
-                </li>
-            <?php endfor; ?>
+
+            <?php
+            // Определяем номера страниц для отображения
+
+            // Отображаем предыдущую страницу, если это необходимо
+            if ($page > 1) {
+                echo '<li class="page-item"><a class="page-link" href="?page=' . ($page - 1) . '">' . ($page - 1) . '</a></li>';
+            }
+
+            // Отображаем текущую страницу
+            echo '<li class="page-item active"><span class="page-link">' . $page . '</span></li>';
+
+            // Отображаем следующую страницу, если это необходимо
+            if ($page < $total_pages) {
+                echo '<li class="page-item"><a class="page-link" href="?page=' . ($page + 1) . '">' . ($page + 1) . '</a></li>';
+            }
+            ?>
+
             <li class="page-item <?= ($page == $total_pages) ? 'disabled' : '' ?>">
                 <a class="page-link" href="?id=<?= $id ?>&page=<?= $page + 1 ?>" aria-label="Следующая">
                     <span aria-hidden="true">&raquo;</span>

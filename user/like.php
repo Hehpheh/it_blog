@@ -1,54 +1,37 @@
 <?php
 
+include_once "app/href.php";
+require_once 'app/database/db.php';
 
-include "app/href.php";
-include 'app/controllers/user_acc.php';
 
-
-// Проверяем, авторизован ли пользователь
-if (!isset($_SESSION['id'])) {
-    echo json_encode(['success' => false, 'message' => 'Вы должны быть авторизованы, чтобы ставить лайки.']);
-    exit;
-}
-
-// Получаем данные из POST-запроса
+$userId = $_SESSION['id'];
 $postId = isset($_POST['id_post']) ? filter_var($_POST['id_post'], FILTER_VALIDATE_INT) : null;
 
-// Проверяем, что ID поста получен и является целым числом
 if ($postId === null || $postId === false) {
     echo json_encode(['success' => false, 'message' => 'Неверный ID поста.']);
     exit;
 }
 
-$userId = $_SESSION['id'];
+// Проверяем, есть ли уже лайк от этого пользователя для этого поста
+$existingLikes = selectAll('likes', ['id_user' => $userId, 'id_post' => $postId]);
 
-// Проверяем, ставил ли пользователь уже лайк этому посту
-$sql_select = "SELECT * FROM likes WHERE id_user = ? AND id_post = ?";
-$stmt = $pdo->prepare($sql_select);
-$stmt->execute([$userId, $postId]);
-
-if ($stmt->rowCount() > 0) {
-    // Пользователь уже ставил лайк - удаляем его (дизлайк)
-    $sql_delete = "DELETE FROM likes WHERE id_user = ? AND id_post = ?";
-    $stmt = $pdo->prepare($sql_delete);
-    $result = $stmt->execute([$userId, $postId]);
-
-    if ($result) {
-        echo json_encode(['success' => true, 'liked' => false]); // Лайк удален
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Ошибка при удалении лайка.']);
-    }
+if (!empty($existingLikes)) {
+    // Пользователь уже ставил лайк - удаляем его
+    delete('likes', $existingLikes[0]['id']);
+    $liked = false;
 } else {
     // Пользователь еще не ставил лайк - добавляем его
-    $sql_insert = "INSERT INTO likes (id_user, id_post) VALUES (?, ?)";
-    $stmt = $pdo->prepare($sql_insert);
-    $result = $stmt->execute([$userId, $postId]);
-
-    if ($result) {
-        echo json_encode(['success' => true, 'liked' => true]); // Лайк добавлен
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Ошибка при добавлении лайка.']);
-    }
+    $likeData = [
+        'id_user' => $userId,
+        'id_post' => $postId
+    ];
+    $id = insert('likes', $likeData);
+    $liked = true;
 }
+
+// Получаем новое количество лайков для данного поста
+$likes_count = count(selectAll('likes', ['id_post' => $postId]));
+
+echo json_encode(['success' => true, 'liked' => $liked, 'likes_count' => $likes_count]); // Возвращаем success, liked и новое количество лайков
 
 exit;

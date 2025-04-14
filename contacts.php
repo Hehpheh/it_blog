@@ -1,6 +1,7 @@
 <?php
 define('ROOT_DIR', __DIR__);
 include ROOT_DIR . '/app/controllers/topics.php';
+include ROOT_DIR . '/app/controllers/contact_form_messages.php';
 ?>
 
 <!doctype html>
@@ -29,36 +30,42 @@ include ROOT_DIR . '/app/controllers/topics.php';
     <div class="row justify-content-center">
     <div class=" col-md-7 my-5">
         <div class="row container">
-
             <h2><strong>Есть вопросы?</strong></h2>
             <p>Свяжитесь с нами, используя форму ниже:</p>
 
-
             <div class="">
-                <form id="contactForm" method="post">
+                <form id="contactForm" method="post" action="contacts.php">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="name">Имя:</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
+                                <input type="text" class="form-control" id="name" name="name" required value="<?=$name?>">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
+                                <input type="email" class="form-control" id="email" name="email" required value="<?=$email?>">
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group mt-3">
                         <label for="message">Сообщение:</label>
-                        <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                        <textarea class="form-control" id="message" name="message" rows="5" required><?=$message?></textarea>
                     </div>
-                    <button type="submit" class="btn  btn-outline-light my-3">Отправить</button>
-                    <div id="response"></div>
+                    <!-- Проверка на наличие ошибок -->
+                    <?php if(!empty($errMsg)): ?>
+                        <div class="alert alert-danger mt-4"><?=$errMsg?></div>
+                    <?php endif; ?>
+                    <!-- Проверка на наличие сообщения об успехе -->
+                    <?php if ($successMsg): ?>
+                        <div class="alert alert-success mt-4">
+                            <?= htmlspecialchars($successMsg) ?>
+                        </div>
+                    <?php endif; ?>
+                    <button type="submit" class="btn  btn-outline-light mt-3" name="button_name" value="Отправить">Отправить</button>
                 </form>
-
             </div>
         </div>
     </div>

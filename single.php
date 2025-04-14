@@ -5,6 +5,8 @@ include 'app/controllers/topics.php';
 $post = selectPostFromPostsWithUsersOnSingle('posts', 'users', $_GET['post']);
 
 
+
+
 ?>
 <!doctype html>
 <html lang="ru">
@@ -44,11 +46,14 @@ $post = selectPostFromPostsWithUsersOnSingle('posts', 'users', $_GET['post']);
                         <?= $post['content'] ?>
                     </div>
                 </div>
-                <div class="like-button mt-3">
-                    <button id="heart-button" class="btn btn-light" type="submit" data-post-id="<?php echo $post['id']; ?>">
-                        <i id="heart-icon" class="bi bi-heart-fill"></i>
-                    </button>
-                </div>
+                <?php if (!empty($_SESSION)): ?>
+                    <div class="like-button mt-3 ms-3">
+                        <button  class="heart-button btn btn-light d-flex justify-content-center align-items-center" type="submit" data-post-id="<?php echo $post['id']; ?>">
+                            <i  class="bi <?php echo (isLiked($post['id'], $_SESSION['id'])) ? 'bi-heart-fill' : 'bi-heart'; ?>"></i>
+                            <span class="counter"><?= getLikesCount($post['id']) ?></span>
+                        </button>
+                    </div>
+                <?php endif; ?>
                 <?php require_once "app/blocks/comments_block.php" ?>
             </div>
         </div>

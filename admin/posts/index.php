@@ -1,6 +1,4 @@
 <?php include "app/controllers/posts.php";
-
-
 ?>
 
 <!doctype html>

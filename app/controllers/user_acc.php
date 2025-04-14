@@ -1,6 +1,6 @@
 <?php
-include "app/database/db.php";
-include "app/href.php";
+include_once "app/database/db.php";
+
 
 $errMsg = [];
 $id = '';

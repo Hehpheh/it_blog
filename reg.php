@@ -24,7 +24,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="regLogin" class="form-label">Логин</label>
-                    <input type="email" value=" <?=  $username  ?>" class="form-control"  name="username"  placeholder="Введите логин">
+                    <input type="text" value=" <?=  $username  ?>" class="form-control"  name="username"  placeholder="Введите логин">
                 </div>
                 <div class="mb-3">
                     <label for="regEmail" class="form-label">Email</label>

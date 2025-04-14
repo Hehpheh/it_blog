@@ -106,23 +106,30 @@ header ul li a:hover {
 
 /*SINGLE POST*/
 
-.like-button {
+/* Стили для кнопки лайка */
+
+
+.like-button .btn {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 1rem;
     cursor: pointer;
+   border: none;
+}
+
+.like-button .btn i {
+    margin-right: 5px;
+    font-size: 2rem;
 
 }
 
-.bi-heart-fill {
+.like-button .btn .counter {
+    font-size:1.4rem;
+
+}
+.like-button .btn .bi-heart-fill {
     color: red;
 }
-
-#heart-icon {
-
-    font-size: 2rem;
-}
-
-
-
-
 
 
 
@@ -193,6 +200,43 @@ header ul li a:hover {
     background-color: transparent;
     font-weight: bold;
 }
+
+.popular-posts {
+    background: #eeeeee;
+
+}
+
+.popular-posts-title {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+
+
+.popular-posts-list {
+    list-style: none;
+    padding: 0;
+}
+
+.popular-posts-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 8px 12px;
+    font-size: 1.25rem;
+}
+.popular-posts-item:last-child {
+    border-bottom: none;
+}
+
+
+.popular-posts-link strong{
+    font-size: 3rem;
+    padding-right: 1rem;
+}
+
+
+
 
 /*Page navigation*/
 .pagination .page-link {

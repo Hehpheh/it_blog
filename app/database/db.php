@@ -206,9 +206,9 @@ function selectAllFromPostsWithUsersOnIndex($table1, $table2,$limit, $offset){
 }
 
 // Выборка записей (posts) с автором на главную
-function selectFromPostsWithUsersForHome($table1, $table2,$limit){
+function selectAllFromPostsWithUsersById($table1, $table2, $user_id, $limit, $offset){
     global $pdo;
-    $sql = "SELECT p.*, u.username FROM $table1 AS p JOIN $table2 AS u ON p.id_user = u.id WHERE p.status=1 ORDER BY created_date DESC LIMIT $limit";
+    $sql = "SELECT p.*, u.username FROM $table1 AS p JOIN $table2 AS u ON p.id_user = u.id WHERE p.status=1 AND p.id_user = $user_id ORDER BY created_date DESC LIMIT $limit OFFSET $offset";
     $query = $pdo->prepare($sql);
     $query->execute();
     dbCheckError($query);
@@ -224,6 +224,7 @@ function selectPostFromPostsWithUsersOnSingle($table1, $table2, $id){
     dbCheckError($query);
     return $query->fetch();
 }
+
 // Поиск по заголовкам и содержимому
 function seacrhInTitileAndContent($text, $table1, $table2){
     $text = trim(strip_tags(stripcslashes(htmlspecialchars($text))));

@@ -40,7 +40,12 @@ $post = selectPostFromPostsWithUsersOnSingle('posts', 'users', $_GET['post']);
                                 <i class="bi bi-calendar-event"></i> <?= $post['created_date'] ?>
                             </p>
                             <p class="text-muted">
-                                <i class="bi bi-person"></i><?= $post['username'] ?>
+                                <i class="bi bi-person"></i>
+                                <?php if ( $post['id_user']===$_SESSION['id']):?>
+                                    <a class="" href="<?= BASE_URL ."/account.php?id=".$_SESSION['id'] ?>"><?php echo $_SESSION['username']; ?></a>
+                                <?php else: ?>
+                                    <a href="another_user.php?id=<?php echo $post['id_user']; ?>"><?php echo $post['username']; ?></a>
+                                <?php endif; ?>
                             </p>
                         </div>
                         <?= $post['content'] ?>

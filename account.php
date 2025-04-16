@@ -77,11 +77,11 @@ $likes=selectAllPostsWithLikes('likes', 'users', $id, $limit, $offset);
                     <?php if (isset($_SESSION['username'])): ?>
                         <h3>Что нового, <?php echo htmlspecialchars($_SESSION['username']); ?>?</h3>
                     <?php endif; ?>
-                    <a href="user/add_post.php" class="btn btn-primary">Добавить пост</a>
+                    <a href="user/add_post.php" class="btn btn-primary">Добавить статью</a>
                 </div>
                 <ul class="nav nav-tabs mb-4">
                     <li class="nav-item">
-                        <a class="nav-link active" id="nav-post-tab" data-toggle="tab" href="#myPosts">Мои посты</a>
+                        <a class="nav-link active" id="nav-post-tab" data-toggle="tab" href="#myPosts">Мои статьи</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="nav-likes-tab" data-toggle="tab" href="#likes">Лайки</a>
@@ -131,9 +131,6 @@ $likes=selectAllPostsWithLikes('likes', 'users', $id, $limit, $offset);
                                                         <div class="d-inline-flex  ">
                                                             <p class="text-muted me-4 ">
                                                                 <i class="bi bi-calendar-event"></i> <?= $post['created_date'] ?>
-                                                            </p>
-                                                            <p class="text-muted">
-                                                                <i class="bi bi-person"></i> <?= $post['username'] ?>
                                                             </p>
                                                         </div>
                                                         <p> <?= mb_substr($post['content'], 0, 155, 'UTF-8') . '...' ?> </p>

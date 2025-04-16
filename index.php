@@ -58,9 +58,14 @@
                                     <i<p class="text-muted inline">
                                     <i class="bi bi-calendar-event"></i> <?=$post['created_date']?>
                                 </p>
-                                <p class="text-muted">
-                                    <i class="bi bi-person"></i> <?=$post['username']?>
-                                </p>
+                                    <p class="text-muted">
+                                        <i class="bi bi-person"></i>
+                                        <?php if ( $post['id_user']===$_SESSION['id']):?>
+                                            <a class="" href="<?= BASE_URL ."/account.php?id=".$_SESSION['id'] ?>"><?php echo $_SESSION['username']; ?></a>
+                                        <?php else: ?>
+                                        <a href="another_user.php?id=<?php echo $post['id_user']; ?>"><?php echo $post['username']; ?></a>
+                                        <?php endif; ?>
+                                    </p>
                                 </div>
                                 <p> <?=mb_substr($post['content'], 0, 155, 'UTF-8'). '...'  ?> </p>
                             </div>
@@ -73,7 +78,7 @@
 
         </div>
         <!--sidebar  content-->
-        <div class=" col-md-3 mt-5">
+        <div class=" col-md-3 mt-5 mb-3">
             <?php require_once ROOT_PATH . "/app/blocks/sidebar.php"; ?>
 
         </div>

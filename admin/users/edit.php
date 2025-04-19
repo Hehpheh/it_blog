@@ -27,9 +27,19 @@ include "app/controllers/users.php";
                     </div>
                     <form action="edit.php" method="post">
                         <h2 class="text-center">Изменение пользователя</h2>
-                        <div class="mb-3 p-3 err">
-                            <?= $errMsg ?>
-                        </div>
+                        <?php if (!empty($errMsg)): ?>
+                            <?php if (is_array($errMsg)): ?>
+                                <?php foreach ($errMsg as $error): ?>
+                                    <div class="alert alert-danger text-center" >
+                                        <?= $error ?>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <div class="alert alert-danger text-center" >
+                                    <?= $errMsg ?>
+                                </div>
+                            <?php endif; ?>
+                        <?php endif; ?>
                         <input type="hidden" name="id" value="<?=$id?>">
                         <div class="mb-3">
                             <label for="regLogin" class="form-label">Логин</label>

@@ -30,7 +30,20 @@ include "app/controllers/topics.php";
                     <div class="button row m-3">
                         <a href="index.php" class="col-4 btn btn-warning">Управление категориями</a>
                     </div>
-                    <h2 class="text-center">Редактироание категории</h2>
+                    <h2 class="text-center">Редактирование категории</h2>
+                    <?php if (!empty($errMsg)): ?>
+                        <?php if (is_array($errMsg)): ?>
+                            <?php foreach ($errMsg as $error): ?>
+                                <div class="alert alert-danger text-center" >
+                                    <?= $error ?>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div class="alert alert-danger text-center" >
+                                <?= $errMsg ?>
+                            </div>
+                        <?php endif; ?>
+                    <?php endif; ?>
                     <form method="post" action="edit.php">
                         <input value="<?=$id?>" type="hidden" class="form-control" name="id">
                         <div class="mb-3">
@@ -38,9 +51,6 @@ include "app/controllers/topics.php";
                             <input value="<?=$name?>" type="text" class="form-control" name="name" placeholder="Введите название категории" required>
                         </div>
                         <button name="topic-edit" type="submit" class="btn btn-primary">Изменить</button>
-                        <div class="mb-3 p-3 text-center err">
-                            <?= $errMsg ?>
-                        </div>
                     </form>
                 </div>
             </div>

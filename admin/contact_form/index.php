@@ -4,7 +4,9 @@ include "app/href.php";?>
 <!doctype html>
 <html lang="ru">
 <head>
-    <metascale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Обратная связь</title>
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
@@ -26,23 +28,23 @@ include "app/href.php";?>
                     <div class="card-header row">
                         <div class="col-1">ID</div>
                         <div class="col-2">Имя</div>
-                        <div class="col-2">Email</div>
-                        <div class="col-4">Текст сообщения</div>
+                        <div class="col-3">Email</div>
+                        <div class="col-3">Текст сообщения</div>
                         <div class="col-3">Управление</div>
                     </div>
 
                     <?php foreach ($messages as $key => $message): ?>
                         <div class="row message p-3 border-bottom">
                             <div class="col-1"><?php echo $message['id']; ?></div>
-                            <div class="col-3"><?php echo $message['name']; ?></div>
-                            <div class="col-3"><?php echo htmlspecialchars($message['email'], ENT_QUOTES, 'UTF-8'); ?></div>
+                            <div class="col-2"><?php echo $message['name']; ?></div> <!-- Уменьшено с col-3 до col-2 -->
+                            <div class="col-3"><?php echo htmlspecialchars($message['email'], ENT_QUOTES, 'UTF-8'); ?></div> <!-- Уменьшено с col-3 до col-2 -->
                             <div class="col-3">
                                 <?php
-                                $message = htmlspecialchars($message['message'], ENT_QUOTES, 'UTF-8');
-                                echo mb_substr($message, 0, 50) . (mb_strlen($message) > 50 ? '...' : '');
+                                $messageText = htmlspecialchars($message['message'], ENT_QUOTES, 'UTF-8');
+                                echo mb_substr($messageText, 0, 50) . (mb_strlen($messageText) > 50 ? '...' : '');
                                 ?>
                             </div>
-                            <div class="col-4">
+                            <div class="col-3">
                                 <a class="text-danger" href="index.php?del_id=<?php echo $message['id']; ?>">Удалить</a>
                             </div>
                         </div>

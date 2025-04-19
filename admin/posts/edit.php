@@ -32,9 +32,19 @@ include "app/controllers/posts.php";
                         <a href="index.php" class="col-3 btn btn-warning">Управление постами</a>
                     </div>
                     <h2 class="text-center">Редактировать cтатью</h2>
-                    <div class="mb-3 p-3 err">
-                        <?= $errMsg ?>
-                    </div>
+                    <?php if (!empty($errMsg)): ?>
+                        <?php if (is_array($errMsg)): ?>
+                            <?php foreach ($errMsg as $error): ?>
+                                <div class="alert alert-danger text-center" >
+                                    <?= $error ?>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div class="alert alert-danger text-center" >
+                                <?= $errMsg ?>
+                            </div>
+                        <?php endif; ?>
+                    <?php endif; ?>
                     <form action="edit.php" method="post" enctype="multipart/form-data" id="edit-post-form">
                         <input type="hidden" name="id" value="<?=$id; ?>">
                         <div class="mb-3">

@@ -19,9 +19,19 @@
         <div class="col-md-5 my-5">
             <form method="post" action="auth.php">
                 <h2 class="text-center">Авторизация</h2>
-                <div class="mb-3 p-3 text-center err">
-                    <?= $errMsg ?>
-                </div>
+                <?php if (!empty($errMsg)): ?>
+                    <?php if (is_array($errMsg)): ?>
+                        <?php foreach ($errMsg as $error): ?>
+                            <div class="alert alert-danger text-center" >
+                                <?= $error ?>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="alert alert-danger text-center" >
+                            <?= $errMsg ?>
+                        </div>
+                    <?php endif; ?>
+                <?php endif; ?>
                 <div class="mb-3">
                     <label for="loginEmail" class="form-label">Email</label>
                     <input name="email"  value=" <?=  $email  ?>"  type="email" class="form-control" aria-describedby="emailHelp" placeholder="Введите email">

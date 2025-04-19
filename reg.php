@@ -19,16 +19,26 @@
         <div class="col-md-5 my-5">
             <form method="post" action="reg.php">
                 <h2 class="text-center">Регистрация</h2>
-                <div class="mb-3 p-3 text-center err">
-                        <?= $errMsg ?>
-                </div>
+                <?php if (!empty($errMsg)): ?>
+                    <?php if (is_array($errMsg)): ?>
+                        <?php foreach ($errMsg as $error): ?>
+                            <div class="alert alert-danger text-center" >
+                                <?= $error ?>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="alert alert-danger text-center" >
+                            <?= $errMsg ?>
+                        </div>
+                    <?php endif; ?>
+                <?php endif; ?>
                 <div class="mb-3">
                     <label for="regLogin" class="form-label">Логин</label>
-                    <input type="text" value=" <?=  $username  ?>" class="form-control"  name="username"  placeholder="Введите логин">
+                    <input type="text" value="<?= $username ?>" class="form-control" name="username" placeholder="Введите логин">
                 </div>
                 <div class="mb-3">
                     <label for="regEmail" class="form-label">Email</label>
-                    <input type="email" value=" <?=  $email  ?>" class="form-control" name="email" placeholder="Введите email">
+                    <input type="email" value="<?= $email ?>" class="form-control" name="email" placeholder="Введите email">
                 </div>
                 <div class="mb-3">
                     <label for="regPassword" class="form-label">Пароль</label>

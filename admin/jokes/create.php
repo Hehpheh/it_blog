@@ -35,10 +35,12 @@ include "app/controllers/jokes.php";
                             <label for="name" class="form-label">Шутка:</label>
                             <textarea type="text" class="form-control" name="text" placeholder="Введите шутку" required><?=$text?></textarea>
                         </div>
+                        <?php if (!empty($errMsg)): ?>
+                            <div class="alert alert-danger text-center">
+                                <?= $errMsg ?>
+                            </div>
+                        <?php endif; ?>
                         <button name="joke-creat" type="submit" class="btn btn-primary">Добавить</button>
-                        <div class="mb-3 p-3 text-center err">
-                            <?= $errMsg ?>
-                        </div>
                     </form>
                 </div>
             </div>

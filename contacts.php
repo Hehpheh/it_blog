@@ -55,8 +55,18 @@ include ROOT_DIR . '/app/controllers/contact_form_messages.php';
                         <textarea class="form-control" id="message" name="message" rows="5" required><?=$message?></textarea>
                     </div>
                     <!-- Проверка на наличие ошибок -->
-                    <?php if(!empty($errMsg)): ?>
-                        <div class="alert alert-danger mt-4"><?=$errMsg?></div>
+                    <?php if (!empty($errMsg)): ?>
+                        <?php if (is_array($errMsg)): ?>
+                            <?php foreach ($errMsg as $error): ?>
+                                <div class="alert alert-danger text-center" >
+                                    <?= $error ?>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div class="alert alert-danger text-center" >
+                                <?= $errMsg ?>
+                            </div>
+                        <?php endif; ?>
                     <?php endif; ?>
                     <!-- Проверка на наличие сообщения об успехе -->
                     <?php if ($successMsg): ?>

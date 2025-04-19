@@ -30,15 +30,25 @@ include "app/controllers/topics.php";
                         <a href="index.php" class="col-4 btn btn-warning">Управление категориями</a>
                     </div>
                     <h2 class="text-center">Добавление категории</h2>
+                    <?php if (!empty($errMsg)): ?>
+                        <?php if (is_array($errMsg)): ?>
+                            <?php foreach ($errMsg as $error): ?>
+                                <div class="alert alert-danger text-center" >
+                                    <?= $error ?>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div class="alert alert-danger text-center" >
+                                <?= $errMsg ?>
+                            </div>
+                        <?php endif; ?>
+                    <?php endif; ?>
                     <form method="post">
                         <div class="mb-3">
                             <label for="name" class="form-label">Название категории:</label>
                             <input value="<?=$name?>" type="text" class="form-control" name="name" placeholder="Введите название категории" required>
                         </div>
                         <button name="topic-creat" type="submit" class="btn btn-primary">Добавить</button>
-                            <div class="mb-3 p-3 text-center err">
-                                <?= $errMsg ?>
-                            </div>
                     </form>
                 </div>
             </div>

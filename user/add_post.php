@@ -27,9 +27,9 @@ include "app/controllers/user_acc.php";
                 <div class="card-body add-post">
                     <h2 class="text-center">Создание Статьи</h2>
                     <?php if (!empty($errMsg)): ?>
-                        <div class="alert alert-danger">
+                        <div class="alert alert-danger text-center">
                             <?php foreach ($errMsg as $error): ?>
-                                <p><?php echo htmlspecialchars($error); ?></p>
+                                <p class="alert-danger mb-0 mt-1"><?php echo htmlspecialchars($error); ?></p>
                             <?php endforeach; ?>
                         </div>
                     <?php endif; ?>

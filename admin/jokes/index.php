@@ -31,23 +31,30 @@ include "app/controllers/jokes.php";
                         <a href="create.php" class="col-4 btn btn-success me-2">Добавить шутку</a>
                     </div>
                     <h2 class="text-center">Управление шутками</h2>
-                    <div class="card-header row">
-                        <div class="col-1">ID</div>
-                        <div class="col-5">Текст</div>
-                        <div class="col-4">Управление</div>
-                    </div>
-                    <?php foreach ($jokes as $key => $joke): ?>
-                        <div class="row p-3 border-bottom">
-                            <div class="col-1"><?php echo $key + 1 ?></div>
-                            <div class="col-5"> <?=mb_substr($joke['text'], 0, 40, 'UTF-8'). '...'  ?> </div>
-                            <div class="col-2">
-                                <a class="text-success" href="edit.php?id=<?php echo $joke['id']; ?>">Edit</a>
-                            </div>
-                            <div class="col-2">
-                                <a class="text-danger" href="edit.php?del_id=<?php echo $joke['id']; ?>">Delete</a>
-                            </div>
+
+                    <?php if (empty($jokes)): ?>
+                        <div class="alert alert-info" role="alert">
+                            Шутки не найдены.
                         </div>
-                    <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="card-header row">
+                            <div class="col-1">ID</div>
+                            <div class="col-5">Текст</div>
+                            <div class="col-4">Управление</div>
+                        </div>
+                        <?php foreach ($jokes as $key => $joke): ?>
+                            <div class="row p-3 border-bottom">
+                                <div class="col-1"><?php echo $key + 1 ?></div>
+                                <div class="col-5"> <?=  mb_substr(html_entity_decode($joke['text'], ENT_QUOTES, 'UTF-8'), 0, 40, 'UTF-8')  . '...' ?> </div>
+                                <div class="col-2">
+                                    <a class="text-success" href="edit.php?id=<?php echo $joke['id']; ?>">Edit</a>
+                                </div>
+                                <div class="col-2">
+                                    <a class="text-danger" href="edit.php?del_id=<?php echo $joke['id']; ?>">Delete</a>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

@@ -26,9 +26,19 @@ include "app/controllers/posts.php";
             <div class="card">
                 <div class="card-body add-post">
                     <h2 class="text-center">Редактирование Статьи</h2>
-                    <div class="mb-3 p-3 err">
-                        <?= $errMsg ?>
-                    </div>
+                    <?php if (!empty($errMsg)): ?>
+                        <?php if (is_array($errMsg)): ?>
+                            <?php foreach ($errMsg as $error): ?>
+                                <div class="alert alert-danger text-center" >
+                                    <?= $error ?>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div class="alert alert-danger text-center" >
+                                <?= $errMsg ?>
+                            </div>
+                        <?php endif; ?>
+                    <?php endif; ?>
                     <form action="edit_post.php" method="post" enctype="multipart/form-data" id="create-post-form">
                         <input type="hidden" name="id" value="<?=$id; ?>">
                         <div class="mb-3">

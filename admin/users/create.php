@@ -32,9 +32,19 @@ include "app/controllers/users.php";
                     </div>
                     <h2 class="text-center">Добавление пользователя</h2>
                     <form action="create.php" method="post">
-                        <div class="mb-3 p-3 err">
-                            <?= $errMsg ?>
-                        </div>
+                        <?php if (!empty($errMsg)): ?>
+                            <?php if (is_array($errMsg)): ?>
+                                <?php foreach ($errMsg as $error): ?>
+                                    <div class="alert alert-danger text-center" >
+                                        <?= $error ?>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <div class="alert alert-danger text-center" >
+                                    <?= $errMsg ?>
+                                </div>
+                            <?php endif; ?>
+                        <?php endif; ?>
                         <div class="mb-3">
                             <label for="regLogin" class="form-label">Логин</label>
                             <input type="text" value="<?= $username ?>" class="form-control" name="username"

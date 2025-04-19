@@ -1,7 +1,7 @@
 <?php
 
-include_once  "app/database/db.php";
-include_once  "app/href.php";
+include_once "app/database/db.php";
+include_once "app/href.php";
 
 
 $messages = selectAll('contact_form_messages');
@@ -14,11 +14,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['del_id'])) {
 }
 
 
-$errMsg = '';
+$errMsg = []; // Инициализируем $errMsg как массив
 $name = '';
 $email = '';
 $message = '';
-$successMsg='';
+$successMsg = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button_name'])) {
     // Получаем данные из формы
@@ -26,6 +26,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button_name'])) {
     $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
     $message = trim(filter_var($_POST['message'], FILTER_SANITIZE_SPECIAL_CHARS));
 
+    if (empty($name)) {
+        $errMsg['name'] = "Пожалуйста, введите ваше имя.";
+    }
+    if (empty($email)) {
+        $errMsg['email'] = "Пожалуйста, введите ваш email.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errMsg['email'] = "Пожалуйста, введите корректный email.";
+    }
+    if (empty($message)) {
+        $errMsg['message'] = "Пожалуйста, введите ваше сообщение.";
+    }
 
 
     if (empty($errMsg)) {
@@ -37,12 +48,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button_name'])) {
 
         $id = insert('contact_form_messages', $contact_form_message);
         if ($id) {
-            $successMsg='Ваше сообщение успешно отправлено!';
+            $successMsg = 'Ваше сообщение успешно отправлено!';
+            $name = '';  //очистка полей формы
+            $email= '';
+            $message = '';
 
         } else {
-            $errMsg = "Ошибка при добавлении сообщения в базу данных.";
+            $errMsg['db'] = "Ошибка при добавлении сообщения в базу данных.";
         }
     }
 }
-
-

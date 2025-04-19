@@ -3,7 +3,7 @@ include_once "app/database/db.php";
 include_once "app/href.php";
 
 $page = $_GET['post'];
-
+$commentsAdm=selectAll('comments',['status'=>1]);
 $username = '';
 $commentText = '';
 $status = 1; //комментарий опубликован
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["comment-btn"])) {
         ];
 
         insert('comments', $comment);
-        $commentText = '';  // <---- Очистка переменной после добавления комментария
+        $commentText = '';
 
         $comments = selectAllFromCommentsWithUsers('comments','users',$page);
 

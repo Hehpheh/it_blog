@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["topic-edit"])) {
         ];
         update('topics',$topic,$id);
         header('location: ' . BASE_URL . '/admin/topics/index.php');
-
+        exit();
     }
 }
 

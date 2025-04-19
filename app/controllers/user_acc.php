@@ -9,7 +9,7 @@ $content = '';
 $img = '';
 $topic = '';
 $status = '';
-
+$description='';
 $topics = selectAll('topics');
 $posts = selectAll('posts');
 $postsAdm = selectAllFromPostsWithUsers('posts', 'users');
@@ -140,6 +140,7 @@ $user = selectOne('users', ['id' => $id]);
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["edit-profile"])) {
     $username = trim(filter_var($_POST['username'], FILTER_SANITIZE_SPECIAL_CHARS));
     $email = trim(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL));
+    $description = trim(filter_var($_POST['description'], FILTER_SANITIZE_SPECIAL_CHARS));
 
     if (empty($username) || empty($email)) {
         $errMsg[] = 'Заполни все поля!';
@@ -180,6 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["edit-profile"])) {
         $userUpdate = [
             'username' => $username,
             'email' => $email,
+            'description'=> $description
         ];
 
         // Добавляем изображение, если оно было загружено
@@ -217,4 +219,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["edit-profile"])) {
         header('location:' . BASE_URL ."/account.php?id=".$_SESSION['id']);
         exit();
     }
+}
+
+
+//Удалить профиль
+$userId = $_SESSION['id'];
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_delete'])) {
+
+    $result = delete('users',$_SESSION['id']);
+
+
+
+        session_unset();
+
+        session_destroy();
+
+        header('location: ' . BASE_URL . '/index.php');
+        exit();
+
 }

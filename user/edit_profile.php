@@ -31,7 +31,7 @@ include 'app/controllers/user_acc.php';
 
                     <form method="post" action="edit_profile.php" enctype="multipart/form-data">
                         <div class="mb-3">
-                            <label for="username" class="form-label">Имя пользователя</label>
+                            <label for="username" class="form-label">Логин пользователя</label>
                             <input type="text" class="form-control" id="username" name="username"
                                    value="<?php echo htmlspecialchars($user['username']); ?>">
                         </div>
@@ -39,6 +39,13 @@ include 'app/controllers/user_acc.php';
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" id="email" name="email"
                                    value="<?php echo htmlspecialchars($user['email']); ?>">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Описание</label>
+                            <input type="description" class="form-control" id="description" name="description"
+                                   value="<?php echo htmlspecialchars($user['description']); ?>">
+                            <div  class="form-text ps-1">Не обязательно</div>
                         </div>
 
 
@@ -64,7 +71,11 @@ include 'app/controllers/user_acc.php';
                         </div>
 
 
-                        <button name="edit-profile" type="submit" class="btn btn-primary">Изменить</button>
+
+                        <div class="d-flex justify-content-between">
+                            <button name="edit-profile" type="submit" class="btn btn-primary">Изменить</button>
+                            <a href="delete_profile.php" class="btn btn-danger">Удалить профиль</a>
+                        </div>
                     </form>
                 </div>
             </div>

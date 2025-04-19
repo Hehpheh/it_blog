@@ -12,6 +12,9 @@ $posts = selectAllPostsByUser('posts', 'users', $id, $limit, $offset);
 
 $total_pages = ceil(countRow('posts', ['id_user' => $id]) / $limit);
 $likes=selectAllPostsWithLikes('likes', 'users', $id, $limit, $offset);
+
+$followerCount = countRow('followers', ['author_id' => $id]);
+$followingCount = countRow('followers', ['follower_id' => $id]);
 ?>
 
 <!doctype html>
@@ -56,14 +59,29 @@ $likes=selectAllPostsWithLikes('likes', 'users', $id, $limit, $offset);
                             echo '<img src="'.$imgUrl.'" alt="Аватар пользователя" class="profile-avatar">';
                             ?>
                         </div>
-                        <h1 class="profile-name"><?php echo htmlspecialchars($_SESSION['username']); ?></h1>
+                        <h1 class="profile-name"><?php echo htmlspecialchars($user['username']); ?></h1>
+                        <?php if (!empty($user['description'])): ?>
+                        <p class=""><?php echo htmlspecialchars($user['description']); ?></p>
+                        <?php endif; ?>
                         <div class="profile-stats">
-                            <a class="me-3" href="#">0 подписчиков</a>
-                            <a href="#">0 подписок</a>
+                            <div class="d-flex">
+                                <div class="text-center me-3">
+                                    <a href="followers.php" class="text-decoration-none ">
+                                        <div class="fw-bold text-white"><?= $followerCount ?></div>
+                                        <div class="text-white">подписчики</div>
+                                    </a>
+                                </div>
+                                <div class="text-center">
+                                    <a href="followings.php" class="text-decoration-none text-white">
+                                        <div class="fw-bold text-white"><?= $followingCount ?></div>
+                                        <div class="text-white">подписки</div>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="mt-4">
+                <div class="my-4">
                     <?php require_once ROOT_PATH . "/app/blocks/sidebar.php"; ?>
                 </div>
             </div>
@@ -74,7 +92,7 @@ $likes=selectAllPostsWithLikes('likes', 'users', $id, $limit, $offset);
             <div class="settings-column">
                 <h3>Аккаунт</h3>
                 <div class="account-info d-flex justify-content-between align-items-center">
-                    <?php if (isset($_SESSION['username'])): ?>
+                    <?php if (isset($user['username'])): ?>
                         <h3>Что нового, <?php echo htmlspecialchars($_SESSION['username']); ?>?</h3>
                     <?php endif; ?>
                     <a href="user/add_post.php" class="btn btn-primary">Добавить статью</a>
@@ -206,11 +224,7 @@ $likes=selectAllPostsWithLikes('likes', 'users', $id, $limit, $offset);
     </div>
     <?php require_once "app/blocks/pagination.php" ?>
 </div>
-
-
-<div class="<?php if (empty($posts)): ?>bottom-page<?php endif; ?>">
     <?php require_once "app/blocks/footer.php" ?>
-</div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -26,5 +26,10 @@
                 <i class="bi bi-envelope  me-2"></i>Обратная связь
             </a>
         </li>
+        <li class="list-group-item">
+            <a href="../jokes/index.php" class="text-white">
+                <i class="bi bi-emoji-laughing  me-2"></i>Шутки
+            </a>
+        </li>
     </ul>
 </div>

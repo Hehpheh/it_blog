@@ -146,6 +146,7 @@ function delete($table,$id){
     $query = $pdo->prepare($sql);
     $query->execute();
     dbCheckError($query);
+
 }
 
 // Выборка записей (posts) с автором в админку
@@ -360,4 +361,22 @@ function getLikesCount($postId)
     $stmt->execute();
     $count = $stmt->fetchColumn();
     return $count;
+}
+function selectAllFollowers($table1, $table2, $authorId){
+    global $pdo;
+
+    $sql = "SELECT 
+                followers.*, 
+                users.*
+            FROM 
+                $table1 AS followers
+            JOIN 
+                $table2 ON followers.follower_id = users.id 
+            WHERE 
+                followers.author_id = $authorId";
+
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchAll();
 }

@@ -1,3 +1,4 @@
+
 <header class="container-fluid">
     <div class="container">
         <div class="row align-items-center">
@@ -36,3 +37,15 @@
         </div>
     </div>
 </header>
+
+
+<script>
+    const links = document.querySelectorAll('header ul li a');
+    const current_page = window.location.pathname;
+
+    links.forEach(link => {
+        if (link.dataset.page === current_page) {
+            link.classList.add('active');
+        }
+    });
+</script>

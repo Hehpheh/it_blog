@@ -100,7 +100,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["edit-post"])) {
     $topic = trim(filter_var($_POST['topic'], FILTER_SANITIZE_NUMBER_INT));
     $status = isset($_POST['publish_status']) ? 1 : 0;
 
-    // Fetch the current post to get the existing image
     $currentPost = selectOne('posts', ['id' => $id]);
     $existingImg = $currentPost['img'];
 

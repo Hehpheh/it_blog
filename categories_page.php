@@ -62,21 +62,14 @@ $total_pages = ceil(countRow('posts', ['topic_id' => $id, 'status' => 1]) / $lim
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
-                <div class="d-flex justify-content-center align-items-center h-100">
+                <div class="d-flex justify-content-center align-items-center h-50">
                     <h5 class="text-center text-secondary">По данной категории ничего не найдено!</h5>
                 </div>
             <?php endif; ?>
         </div>
 
         <!-- sidebar content -->
-        <div class="sidebar col-md-3 mt-5">
-            <div class="search-section container p-3">
-                <form class="d-flex" role="search" method="post" action="search.php">
-                    <input name="search-text" class="form-control me-2" type="search" placeholder="Поиск"
-                           aria-label="Поиск">
-                    <button name="search-btn" class="btn btn-primary" type="submit">Поиск</button>
-                </form>
-            </div>
+        <div class="sidebar col-md-3 my-5">
             <?php require_once ROOT_PATH . "/app/blocks/sidebar.php"; ?>
         </div>
     </div>
@@ -84,9 +77,8 @@ $total_pages = ceil(countRow('posts', ['topic_id' => $id, 'status' => 1]) / $lim
     <?php require_once "app/blocks/pagination.php" ?>
 </div>
 
-<div class="<?php if (empty($posts)): ?>bottom-page<?php endif; ?>">
     <?php require_once "app/blocks/footer.php" ?>
-</div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

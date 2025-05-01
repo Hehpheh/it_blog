@@ -7,7 +7,7 @@ function tt($value){
     echo '<pre>';
     print_r($value);
     echo '</pre>';
-    edit();
+    exit();
 }
 function tt2($value){
     echo '<pre>';

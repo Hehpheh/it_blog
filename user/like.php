@@ -12,15 +12,15 @@ if ($postId === null || $postId === false) {
     exit;
 }
 
-// Проверяем, есть ли уже лайк от этого пользователя для этого поста
+
 $existingLikes = selectAll('likes', ['id_user' => $userId, 'id_post' => $postId]);
 
 if (!empty($existingLikes)) {
-    // Пользователь уже ставил лайк - удаляем его
+
     delete('likes', $existingLikes[0]['id']);
     $liked = false;
 } else {
-    // Пользователь еще не ставил лайк - добавляем его
+
     $likeData = [
         'id_user' => $userId,
         'id_post' => $postId
@@ -29,9 +29,9 @@ if (!empty($existingLikes)) {
     $liked = true;
 }
 
-// Получаем новое количество лайков для данного поста
+
 $likes_count = count(selectAll('likes', ['id_post' => $postId]));
 
-echo json_encode(['success' => true, 'liked' => $liked, 'likes_count' => $likes_count]); // Возвращаем success, liked и новое количество лайков
+echo json_encode(['success' => true, 'liked' => $liked, 'likes_count' => $likes_count]);
 
 exit;

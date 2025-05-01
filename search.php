@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['search-btn'])){
         </div>
         <!--sidebar  content-->
 
-        <div class="sidebar col-md-3 mt-4 p-3">
+        <div class="sidebar col-md-3 my-5">
             <?php require_once ROOT_PATH . "/app/blocks/sidebar.php"; ?>
         </div>
     </div>
@@ -74,9 +74,9 @@ if ($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['search-btn'])){
 
 </div>
 </div>
-<div class="<?php if (empty($posts)): ?>bottom-page<?php endif; ?>">
+
     <?php require_once "app/blocks/footer.php" ?>
-</div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>

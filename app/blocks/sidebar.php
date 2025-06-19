@@ -1,7 +1,7 @@
 <div class="sidebar">
     <!-- Поиск -->
     <div class="search-section container-p-0">
-        <form class="d-flex" role="search" method="post" action="search.php">
+        <form class="d-flex" role="search" method="GET" action="search.php">
             <div class="input-group">
                 <input name="search-text" class="form-control" type="search" placeholder="Поиск" aria-label="Поиск">
                 <button name="search-btn" class="btn btn-primary" type="submit">
@@ -45,7 +45,7 @@
 
     if (empty($topPosts)) {
         // Если нет лайков за последнюю неделю, выбираем 5 случайных статей
-        $sql = "SELECT id, title FROM posts ORDER BY RAND() LIMIT 5";
+        $sql = "SELECT id, title FROM posts WHERE status=1 ORDER BY RAND() LIMIT 5 ";
         $query = $pdo->prepare($sql);
         $query->execute();
         $topPosts = $query->fetchAll();

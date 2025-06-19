@@ -2,12 +2,9 @@
 include "app/href.php";
 include  'app/controllers/topics.php';
 
-if ($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['search-btn'])){
-    $posts=seacrhInTitileAndContent($_POST['search-text'],'posts','users');
-
+if ($_SERVER['REQUEST_METHOD']==='GET' && isset($_GET['search-btn'])){
+    $posts=seacrhInTitileAndContent($_GET['search-text'],'posts','users');
 }
-
-
 
 ?>
 <!doctype html>

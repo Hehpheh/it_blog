@@ -35,10 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['commentText'])) {
         echo json_encode(['success' => false, 'message' => 'Ошибка при добавлении комментария.']);
         exit;
     }
-} else {
-
-    echo json_encode(['success' => false, 'message' => 'Недопустимый запрос.']);
-    exit;
 }
 
 // удалить комментарий

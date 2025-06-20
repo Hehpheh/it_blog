@@ -36,12 +36,12 @@ include "app/href.php";?>
                     <?php foreach ($messages as $key => $message): ?>
                         <div class="row message p-3 border-bottom">
                             <div class="col-1"><?php echo $message['id']; ?></div>
-                            <div class="col-2"><?php echo $message['name']; ?></div> <!-- Уменьшено с col-3 до col-2 -->
+                            <div class="col-2"><?php echo $message['name']; ?></div>
                             <div class="col-3"><?php echo htmlspecialchars($message['email'], ENT_QUOTES, 'UTF-8'); ?></div> <!-- Уменьшено с col-3 до col-2 -->
                             <div class="col-3">
                                 <?php
                                 $messageText = htmlspecialchars($message['message'], ENT_QUOTES, 'UTF-8');
-                                echo mb_substr($messageText, 0, 50) . (mb_strlen($messageText) > 50 ? '...' : '');
+                                echo $messageText;
                                 ?>
                             </div>
                             <div class="col-3">

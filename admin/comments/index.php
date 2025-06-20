@@ -1,7 +1,6 @@
 <?php
 
-include_once "app/database/db.php";
-include_once "app/href.php";
+include_once "app/controllers/comments.php";
 
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $limit = 5;
@@ -52,7 +51,7 @@ $total_pages = ceil(countRow('comments') / $limit);
                             <div class="col-4">
                                 <?php
                                 $message = htmlspecialchars($comment['commentText'], ENT_QUOTES, 'UTF-8');
-                                echo mb_substr($message, 0, 50) . (mb_strlen($message) > 50 ? '...' : '');
+                                echo $message;
                                 ?>
                             </div>
                             <div class="col-2"><?php echo date('d.m.Y H:i', strtotime($comment['created_date'])); ?></div>

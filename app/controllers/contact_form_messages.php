@@ -9,12 +9,12 @@ $messages = selectAll('contact_form_messages');
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['del_id'])) {
     $id = $_GET['del_id'];
     delete('contact_form_messages', $id);
-    header('location: ' . BASE_URL . '/contact_form/index.php');
+    header('location: ' . BASE_URL . '/admin/contact_form/index.php');
     exit();
 }
 
 
-$errMsg = []; // Инициализируем $errMsg как массив
+$errMsg = [];
 $name = '';
 $email = '';
 $message = '';
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button_name'])) {
         $id = insert('contact_form_messages', $contact_form_message);
         if ($id) {
             $successMsg = 'Ваше сообщение успешно отправлено!';
-            $name = '';  //очистка полей формы
+            $name = '';
             $email= '';
             $message = '';
 

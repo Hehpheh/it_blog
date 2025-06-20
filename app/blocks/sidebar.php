@@ -28,15 +28,18 @@
     <?php
     global $pdo;
 
-    $sql = "SELECT posts.id, posts.title, COUNT(likes.id) AS like_count
-        FROM posts
-        INNER JOIN likes ON posts.id = likes.id_post
-        WHERE likes.created_date >= DATE(NOW()) - INTERVAL 7 DAY
-        GROUP BY posts.id
-        HAVING
-        like_count > 0
-        ORDER BY like_count DESC
-        LIMIT 5
+    $sql = "SELECT 
+    posts.id, 
+    posts.title, 
+    COUNT(likes.id) AS like_count
+FROM posts
+INNER JOIN likes ON posts.id = likes.id_post
+WHERE 
+    likes.created_date >= DATE(NOW()) - INTERVAL 7 DAY AND posts.status = 1
+GROUP BY posts.id
+HAVING like_count > 0
+ORDER BY like_count DESC
+LIMIT 5
         ";
 
     $query = $pdo->prepare($sql);

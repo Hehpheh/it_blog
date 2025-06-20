@@ -29,6 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-reg'])) {
     $password = trim(filter_var($_POST['password'], FILTER_SANITIZE_SPECIAL_CHARS));
     $password_confirm = trim(filter_var($_POST['password_confirm'], FILTER_SANITIZE_SPECIAL_CHARS));
 
+    $select_username = selectOne('users', ['username' => $username]);
+    if ($select_username && $select_username['id'] != $id) {
+        $errMsg[] = "Пользователь с таким именем пользователя уже существует";
+    }
     if (empty($username) || empty($email) || empty($password)) {
         $errMsg['reg'] = 'Заполни все поля!';
     } elseif (strlen($username) < 2) {
